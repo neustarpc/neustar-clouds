@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<!-- XDI ENDPOINT REGISTRY AND TRANSPORT -->
+
+	<bean id="HttpEndpointRegistry" class="xdi2.server.registry.HttpEndpointRegistry" init-method="init" destroy-method="shutdown" />
+
+	<bean id="HttpTransport" class="xdi2.server.transport.HttpTransport" init-method="init" destroy-method="shutdown">
+		<property name="httpEndpointRegistry" ref="HttpEndpointRegistry" />
+		<property name="interceptors">
+			<util:list>
+				<bean class="xdi2.server.interceptor.impl.DebugHttpTransportInterceptor" />
+			</util:list>
+		</property>
+	</bean>
+
+	<!-- SPRING -->
+
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="xdi2.server.spring.StringXDI3StatementConverter" />
+				<bean class="xdi2.server.spring.StringXDI3SegmentConverter" />
+				<bean class="xdi2.server.spring.StringXDI3SubSegmentConverter" />
+				<bean class="xdi2.server.spring.StringXDI3XRefConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- MESSAGING TARGET TO BE USED AS A PROTOTYPE FOR MESSAGING TARGET FACTORIES -->
+
+	<bean id="prototypeGraphFactory" class="xdi2.core.impl.zephyr.ZephyrGraphFactory">
+		<property name="dataApi" value="http://192.168.1.100:10002/" />
+		<property name="oauthToken" value="SECRET" />
+	</bean>
+
+	<bean id="prototypeGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph" />
+
+	<bean id="prototypeMessagingTarget" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
+		<property name="graph" ref="prototypeGraph" />
+		<property name="interceptors">
+			<util:list>
+				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
+					<property name="bootstrapLinkContract" value="true" />
+					<property name="bootstrapPublicLinkContract" value="true" />
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.LinkContractInterceptor" />
+			</util:list>
+		</property>
+	</bean>
+
+	<!-- MESSAGING TARGET FACTORY at /users/* -->
+
+	<bean id="registryGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph">
+		<constructor-arg><value>REGISTRY</value></constructor-arg>
+	</bean>
+
+	<bean name="/users/*" class="xdi2.server.factory.impl.RegistryGraphMessagingTargetFactory">
+		<property name="prototypeMessagingTarget" ref="prototypeMessagingTarget" />
+		<property name="registryGraph" ref="registryGraph" />
+	</bean>
+
+	<!-- REGISTRY MESSAGING TARGET -->
+
+	<bean name="/registry" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
+		<property name="graph" ref="registryGraph" />
+		<property name="interceptors">
+			<util:list>
+				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
+					<property name="bootstrapOwner" value="[=]" />
+					<property name="bootstrapOwnerSynonyms">
+						<util:list />
+					</property>
+					<property name="bootstrapSharedSecret" value="s3cret" />
+					<property name="bootstrapLinkContract" value="true" />
+					<property name="bootstrapPublicLinkContract" value="true" />
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.LinkContractInterceptor">
+					<property name="linkContractsGraph" ref="registryGraph" />
+				</bean>
+			</util:list>
+		</property>
+	</bean>
+
+</beans>
