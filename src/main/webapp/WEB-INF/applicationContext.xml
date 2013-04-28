@@ -32,7 +32,7 @@
 	<!-- MESSAGING TARGET TO BE USED AS A PROTOTYPE FOR MESSAGING TARGET FACTORIES -->
 
 	<bean id="prototypeGraphFactory" class="xdi2.core.impl.zephyr.ZephyrGraphFactory">
-		<property name="dataApi" value="http://192.168.1.100:10002/" />
+		<property name="dataApi" value="http://127.0.0.1:10002/" />
 		<property name="oauthToken" value="SECRET" />
 	</bean>
 
@@ -72,7 +72,7 @@
 		<property name="interceptors">
 			<util:list>
 				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
-					<property name="bootstrapOwner" value="[=]" />
+					<property name="bootstrapOwner" value="[@]!:uuid:0baea650-823b-2475-0bae-a650823b2475" />
 					<property name="bootstrapOwnerSynonyms">
 						<util:list />
 					</property>
