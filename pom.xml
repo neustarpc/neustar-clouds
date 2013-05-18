@@ -2,28 +2,29 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>xdi2</groupId>
-	<artifactId>xdi2-grs</artifactId>
+	<groupId>danube-clouds</groupId>
+	<artifactId>danube-clouds</artifactId>
 	<packaging>war</packaging>
 	<version>0.1-SNAPSHOT</version>
-	<name>xdi2-grs</name>
+	<name>danube-clouds</name>
+	<description>Danube Clouds</description>
 
 	<issueManagement>
-		<url>https://github.com/peacekeeper/xdi2-grs/issues</url>
+		<url>https://github.com/peacekeeper/danube-clouds/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
 	<distributionManagement>
 		<site>
 			<id>github-project-site</id>
-			<url>scm:git:ssh://git@github.com/peacekeeper/xdi2-grs.git:gh-pages</url>
+			<url>scm:git:ssh://git@github.com/peacekeeper/danube-clouds.git:gh-pages</url>
 		</site>
 	</distributionManagement>
 
 	<scm>
-		<url>https://github.com/peacekeeper/xdi2-grs</url>
-		<connection>scm:git:git://github.com/peacekeeper/xdi2-grs.git</connection>
-		<developerConnection>scm:git:git@github.com:peacekeeper/xdi2-grs.git</developerConnection>
+		<url>https://github.com/peacekeeper/danube-clouds</url>
+		<connection>scm:git:git://github.com/peacekeeper/danube-clouds.git</connection>
+		<developerConnection>scm:git:git@github.com:peacekeeper/danube-clouds.git</developerConnection>
 	</scm>
 
 	<properties>
