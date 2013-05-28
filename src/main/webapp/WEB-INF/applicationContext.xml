@@ -113,7 +113,6 @@
 					<property name="bootstrapOwnerSynonyms">
 						<util:list />
 					</property>
-					<property name="bootstrapSharedSecret" value="s3cret" />
 					<property name="bootstrapLinkContract" value="true" />
 					<property name="bootstrapPublicLinkContract" value="true" />
 				</bean>
