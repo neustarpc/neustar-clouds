@@ -76,7 +76,7 @@
 					<property name="secretTokenAuthenticator">
 						<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.GraphSecretTokenAuthenticator">
 							<property name="globalSalt" value="c2293773-3240-4524-8c19-c1f5cbe31b86" />
-							<property name="secretTokenGraph" ref="registrygraph" />
+							<property name="secretTokenGraph" ref="registryGraph" />
 						</bean>
 					</property>
 				</bean>
@@ -133,7 +133,7 @@
 					</property>
 				</bean>
 				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor">
-					<property name="linkContractsGraph" ref="registrygraph" />
+					<property name="linkContractsGraph" ref="registryGraph" />
 				</bean>
 			</util:list>
 		</property>
