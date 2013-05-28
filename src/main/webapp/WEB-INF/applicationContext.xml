@@ -131,9 +131,7 @@
 						</bean>
 					</property>
 				</bean>
-				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor">
-					<property name="linkContractsGraph" ref="registryGraph" />
-				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
 			</util:list>
 		</property>
 	</bean>
