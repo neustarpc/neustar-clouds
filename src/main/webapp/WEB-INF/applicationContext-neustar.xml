@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<!-- MESSAGING TARGET TO BE USED AS A PROTOTYPE FOR MESSAGING TARGET FACTORIES -->
+
+	<bean id="prototypeGraphFactory" class="xdi2.core.impl.zephyr.ZephyrGraphFactory">
+		<property name="dataApi" value="http://127.0.0.1:10002/" />
+		<property name="oauthToken" value="SECRET" />
+	</bean>
+
+	<bean id="prototypeGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph" />
+
+	<bean id="prototypeMessagingTarget" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
+		<property name="graph" ref="prototypeGraph" />
+		<property name="interceptors">
+			<util:list>
+				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
+					<property name="bootstrapLinkContract" value="true" />
+					<property name="bootstrapPublicLinkContract" value="true" />
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
+					<property name="secretTokenAuthenticator">
+						<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.GraphSecretTokenAuthenticator">
+							<property name="globalSalt" value="c2293773-3240-4524-8c19-c1f5cbe31b86" />
+							<property name="secretTokenGraph" ref="registryGraph" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
+				<ref bean="facebookContributor" />
+			</util:list>
+		</property>
+		<property name="contributors">
+			<util:map>
+				<entry key="(https://facebook.com/)" value-ref="facebookContributor" />
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- MESSAGING TARGET FACTORY at /users/* -->
+
+	<bean name="/users/*" class="xdi2.server.factory.impl.RegistryGraphMessagingTargetFactory">
+		<property name="prototypeMessagingTarget" ref="prototypeMessagingTarget" />
+		<property name="registryGraph" ref="registryGraph" />
+	</bean>
+
+	<!-- REGISTRY MESSAGING TARGET -->
+
+	<bean id="registryGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph">
+		<constructor-arg><value>REGISTRY</value></constructor-arg>
+	</bean>
+
+	<bean name="/registry" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
+		<property name="graph" ref="registryGraph" />
+		<property name="interceptors">
+			<util:list>
+				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
+					<property name="bootstrapOwner" value="[@]!:uuid:0baea650-823b-2475-0bae-a650823b2475" />
+					<property name="bootstrapOwnerSynonyms">
+						<util:list />
+					</property>
+					<property name="bootstrapLinkContract" value="true" />
+					<property name="bootstrapPublicLinkContract" value="true" />
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
+					<property name="secretTokenAuthenticator">
+						<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.StaticSecretTokenAuthenticator">
+							<property name="globalSalt" value="c2293773-3240-4524-8c19-c1f5cbe31b86" />
+							<property name="localSaltAndDigestSecretTokens">
+								<util:map>
+									<entry key="[@]!:uuid:0baea650-823b-2475-0bae-a650823b2475" value="xdi2-digest:e8644857-c907-42db-a590-f17ff9d9274f:3aa472e352bfd95720c054dc16d5b626ff0c1f578058ba28a69fc2958b27ad14d0f0c5938a57ddd25c073d7aadd347048432c885f7a9e14c2942ecb867607ccd" />
+									<entry key="[@]!:uuid:299089fd-9d81-3c59-2990-89fd9d813c59" value="xdi2-digest:39bc0877-5572-4858-b096-a6189fc2a97f:d2bd5ff789bdb8b1617bb8f860d0bb45dcc33b2bad026afb34b315828d5e8073e886996f232916cf6d909980f1cd4f850c65dc2a109161ed954f3d91e748ee30" />
+								</util:map>
+							</property>
+						</bean>
+					</property>
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
+			</util:list>
+		</property>
+	</bean>
+
+</beans>
