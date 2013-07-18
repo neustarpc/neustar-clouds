@@ -5,15 +5,8 @@
 
 	<!-- OWNYOURINFO: MESSAGING TARGET TO BE USED AS A PROTOTYPE FOR MESSAGING TARGET FACTORIES -->
 
-	<bean id="ownyourinfo-prototypeGraphFactory" class="xdi2.core.impl.zephyr.ZephyrGraphFactory">
-		<property name="dataApi" value="http://127.0.0.1:10002/" />
-		<property name="oauthToken" value="SECRET" />
-	</bean>
-
-	<bean id="ownyourinfo-prototypeGraph" factory-bean="ownyourinfo-prototypeGraphFactory" factory-method="openGraph" />
-
 	<bean id="ownyourinfo-prototypeMessagingTarget" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
-		<property name="graph" ref="ownyourinfo-prototypeGraph" />
+		<property name="graph" ref="prototypeGraph" />
 		<property name="interceptors">
 			<util:list>
 				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
@@ -51,7 +44,7 @@
 
 	<!-- OWNYOURINFO: REGISTRY MESSAGING TARGET -->
 
-	<bean id="ownyourinfo-registryGraph" factory-bean="ownyourinfo-prototypeGraphFactory" factory-method="openGraph">
+	<bean id="ownyourinfo-registryGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph">
 		<constructor-arg><value>OWNYOURINFO-REGISTRY</value></constructor-arg>
 	</bean>
 

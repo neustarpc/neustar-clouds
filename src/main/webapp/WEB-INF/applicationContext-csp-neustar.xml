@@ -5,13 +5,6 @@
 
 	<!-- MESSAGING TARGET TO BE USED AS A PROTOTYPE FOR MESSAGING TARGET FACTORIES -->
 
-	<bean id="prototypeGraphFactory" class="xdi2.core.impl.zephyr.ZephyrGraphFactory">
-		<property name="dataApi" value="http://127.0.0.1:10002/" />
-		<property name="oauthToken" value="SECRET" />
-	</bean>
-
-	<bean id="prototypeGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph" />
-
 	<bean id="prototypeMessagingTarget" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
 		<property name="graph" ref="prototypeGraph" />
 		<property name="interceptors">
