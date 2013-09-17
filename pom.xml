@@ -2,29 +2,29 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>danube-clouds</groupId>
-	<artifactId>danube-clouds</artifactId>
+	<groupId>neustar-clouds</groupId>
+	<artifactId>neustar-clouds</artifactId>
 	<packaging>war</packaging>
 	<version>0.1-SNAPSHOT</version>
-	<name>danube-clouds</name>
-	<description>Danube Clouds</description>
+	<name>neustar-clouds</name>
+	<description>neustar Clouds</description>
 
 	<issueManagement>
-		<url>https://github.com/peacekeeper/danube-clouds/issues</url>
+		<url>https://github.com/peacekeeper/neustar-clouds/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
 	<distributionManagement>
 		<site>
 			<id>github-project-site</id>
-			<url>scm:git:ssh://git@github.com/peacekeeper/danube-clouds.git:gh-pages</url>
+			<url>scm:git:ssh://git@github.com/peacekeeper/neustar-clouds.git:gh-pages</url>
 		</site>
 	</distributionManagement>
 
 	<scm>
-		<url>https://github.com/peacekeeper/danube-clouds</url>
-		<connection>scm:git:git://github.com/peacekeeper/danube-clouds.git</connection>
-		<developerConnection>scm:git:git@github.com:peacekeeper/danube-clouds.git</developerConnection>
+		<url>https://github.com/peacekeeper/neustar-clouds</url>
+		<connection>scm:git:git://github.com/peacekeeper/neustar-clouds.git</connection>
+		<developerConnection>scm:git:git@github.com:peacekeeper/neustar-clouds.git</developerConnection>
 	</scm>
 
 	<properties>

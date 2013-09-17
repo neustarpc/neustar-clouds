@@ -1,12 +1,11 @@
-<a href="http://projectdanube.org/" target="_blank"><img src="http://peacekeeper.github.com/xdi2/images/projectdanube_logo.png" align="right"></a>
 <img src="http://peacekeeper.github.com/xdi2/images/logo64.png"><br>
 
-This is a profile of the [XDI2](http://github.com/peacekeeper/xdi2) server, configured to use [Zephyr](http://github.com/airships/zephyr) as a backend for 
+This is a profile of the [XDI2](http://github.com/projectdanube/xdi2) server, configured to use [Zephyr](http://github.com/airships/zephyr) as a backend for 
 graph storage, and to instantiate XDI graphs for every authority in the xri.net Global Registry.
 
 ### How to build
 
-First, you need to build the main [XDI2](http://github.com/peacekeeper/xdi2) project.
+First, you need to build the main [XDI2](http://github.com/projectdanube/xdi2) project.
 
 After that, just run
 
