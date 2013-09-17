@@ -10,21 +10,21 @@
 	<description>neustar Clouds</description>
 
 	<issueManagement>
-		<url>https://github.com/peacekeeper/neustar-clouds/issues</url>
+		<url>https://github.com/neustarpc/neustar-clouds/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
 	<distributionManagement>
 		<site>
 			<id>github-project-site</id>
-			<url>scm:git:ssh://git@github.com/peacekeeper/neustar-clouds.git:gh-pages</url>
+			<url>scm:git:ssh://git@github.com/neustarpc/neustar-clouds.git:gh-pages</url>
 		</site>
 	</distributionManagement>
 
 	<scm>
-		<url>https://github.com/peacekeeper/neustar-clouds</url>
-		<connection>scm:git:git://github.com/peacekeeper/neustar-clouds.git</connection>
-		<developerConnection>scm:git:git@github.com:peacekeeper/neustar-clouds.git</developerConnection>
+		<url>https://github.com/neustarpc/neustar-clouds</url>
+		<connection>scm:git:git://github.com/neustarpc/neustar-clouds.git</connection>
+		<developerConnection>scm:git:git@github.com:neustarpc/neustar-clouds.git</developerConnection>
 	</scm>
 
 	<properties>
