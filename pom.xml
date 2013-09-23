@@ -230,7 +230,7 @@
 		</dependency>
 		<dependency>
 			<groupId>xdi2</groupId>
-			<artifactId>xdi2-zephyr</artifactId>
+			<artifactId>xdi2-mongodb</artifactId>
 			<version>0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
