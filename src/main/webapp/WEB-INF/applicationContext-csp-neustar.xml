@@ -29,9 +29,10 @@
 			</util:list>
 		</property>
 		<property name="contributors">
-			<util:map>
-				<entry key="(https://facebook.com/)" value-ref="facebookContributor" />
-			</util:map>
+			<util:list>
+				<ref bean="facebookContributor" />
+				<bean id="generateKeyContributor" class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
+			</util:list>
 		</property>
 	</bean>
 
@@ -77,6 +78,13 @@
 					</property>
 				</bean>
 				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
+			</util:list>
+		</property>
+		<property name="contributors">
+			<util:list>
+				<bean id="generateDigestSecretTokenContributor" class="xdi2.messaging.target.contributor.impl.digest.GenerateDigestSecretTokenContributor">
+					<property name="globalSalt" value="c2293773-3240-4524-8c19-c1f5cbe31b86" />
+				</bean>
 			</util:list>
 		</property>
 	</bean>
