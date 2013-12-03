@@ -38,6 +38,7 @@
 						</bean>
 					</property>
 				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.transport.HttpTransportDataInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
 				<ref bean="facebookContributor" />
 			</util:list>
