@@ -28,7 +28,6 @@
 						</value>
 					</property>
 				</bean>
-				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
@@ -76,7 +75,6 @@
 					<property name="bootstrapRootLinkContract" value="true" />
 					<property name="bootstrapPublicLinkContract" value="true" />
 				</bean>
-				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
