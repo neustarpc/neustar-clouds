@@ -31,6 +31,5 @@
 	<import resource="applicationContext-csp-shared.xml" />
 	<import resource="applicationContext-csp-respect.xml" />
 	<import resource="applicationContext-csp-ownyourinfo.xml" />
-	<import resource="applicationContext-csp-fullxri.xml" />
 
 </beans>
