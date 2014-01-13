@@ -69,7 +69,9 @@
 				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
 					<property name="bootstrapOwner" value="[@]!:uuid:ca51aeb9-e09e-4305-89d7-87a944a1e1fa" />
 					<property name="bootstrapOwnerSynonyms">
-						<util:list />
+						<util:list>
+							<value>@respect</value>
+						</util:list>
 					</property>
 					<property name="bootstrapRootLinkContract" value="true" />
 					<property name="bootstrapPublicLinkContract" value="true" />
