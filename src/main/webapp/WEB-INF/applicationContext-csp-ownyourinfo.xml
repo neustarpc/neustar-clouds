@@ -51,7 +51,7 @@
 
 	<!-- OWNYOURINFO: MESSAGING TARGET FACTORY at /ownyourinfo-users/* -->
 
-	<bean name="/ownyourinfo-users/*" class="xdi2.server.factory.impl.RegistryGraphMessagingTargetFactory">
+	<bean name="/ownyourinfo-users/*" class="xdi2.transport.impl.http.factory.impl.RegistryGraphMessagingTargetFactory">
 		<property name="prototypeMessagingTarget" ref="ownyourinfo-prototypeMessagingTarget" />
 		<property name="registryGraph" ref="ownyourinfo-registryGraph" />
 	</bean>

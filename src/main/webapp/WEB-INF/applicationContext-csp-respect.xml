@@ -51,7 +51,7 @@
 
 	<!-- MESSAGING TARGET FACTORY at /users/* -->
 
-	<bean name="/users/*" class="xdi2.server.factory.impl.RegistryGraphMessagingTargetFactory">
+	<bean name="/users/*" class="xdi2.transport.impl.http.factory.impl.RegistryGraphMessagingTargetFactory">
 		<property name="prototypeMessagingTarget" ref="prototypeMessagingTarget" />
 		<property name="registryGraph" ref="registryGraph" />
 	</bean>
