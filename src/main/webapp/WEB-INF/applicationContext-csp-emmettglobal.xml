@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<!-- EMMETTGLOBAL: MESSAGING TARGET TO BE USED AS A PROTOTYPE FOR MESSAGING TARGET FACTORIES -->
+
+	<bean id="emmettglobal-prototypeMessagingTarget" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
+		<property name="graph" ref="prototypeGraph" />
+		<property name="interceptors">
+			<util:list>
+				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
+					<property name="bootstrapRootLinkContract" value="true" />
+					<property name="bootstrapPublicLinkContract" value="true" />
+					<property name="bootstrapGraph">
+						<value>
+							{$self}$to$anon$from$public$do/$get/{$self}$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is+/{})
+							{$self}$to$anon$from$public$do/$get/{$self}$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is+/{})
+						</value>
+					</property>
+					<property name="bootstrapMessageEnvelope">
+						<value>
+							$anon[$msg]!1$do/$do$keypair/({$self}$msg$encrypt$keypair/$is+/$rsa$2048)
+							$anon[$msg]!1$do/$do$keypair/({$self}$msg$sig$keypair/$is+/$rsa$2048)
+						</value>
+					</property>
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
+					<property name="secretTokenAuthenticator">
+						<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.GraphSecretTokenAuthenticator">
+							<property name="globalSalt" value="aea0c2b1-56c6-4443-913c-a3c6ecfe6c99" />
+							<property name="secretTokenGraph" ref="emmettglobal-registryGraph" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
+				<ref bean="facebookContributor" />
+			</util:list>
+		</property>
+		<property name="contributors">
+			<util:list>
+				<ref bean="facebookContributor" />
+				<bean class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
+			</util:list>
+		</property>
+	</bean>
+
+	<!-- EMMETTGLOBAL: MESSAGING TARGET FACTORY at /emmettglobal-users/* -->
+
+	<bean name="/emmettglobal-users/*" class="xdi2.transport.impl.http.factory.impl.RegistryGraphMessagingTargetFactory">
+		<property name="prototypeMessagingTarget" ref="emmettglobal-prototypeMessagingTarget" />
+		<property name="registryGraph" ref="emmettglobal-registryGraph" />
+	</bean>
+
+	<!-- EMMETTGLOBAL: REGISTRY MESSAGING TARGET -->
+
+	<bean id="emmettglobal-registryGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph">
+		<constructor-arg><value>EMMETTGLOBAL-REGISTRY</value></constructor-arg>
+	</bean>
+
+	<bean name="/emmettglobal-registry" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
+		<property name="graph" ref="emmettglobal-registryGraph" />
+		<property name="interceptors">
+			<util:list>
+				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
+					<property name="bootstrapOwner" value="[@]!:uuid:690404d0-df12-4a60-a98c-fd975ea79e5b" />
+					<property name="bootstrapOwnerSynonyms">
+						<util:list>
+							<value>@emmettglobal</value>
+						</util:list>
+					</property>
+					<property name="bootstrapRootLinkContract" value="true" />
+					<property name="bootstrapPublicLinkContract" value="true" />
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
+				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
+					<property name="secretTokenAuthenticator">
+						<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.StaticSecretTokenAuthenticator">
+							<property name="globalSalt" value="aea0c2b1-56c6-4443-913c-a3c6ecfe6c99" />
+							<property name="localSaltAndDigestSecretTokens">
+								<util:map>
+									<entry key="[@]!:uuid:690404d0-df12-4a60-a98c-fd975ea79e5b" value="xdi2-digest:961adc0a-eab9-491d-86c4-4fb05779c832:875c1173ba018a284e4f9cc6e2f6a951606afaa124a96ca2f9a318da4bbd99c524287d1c3391365cfc25a2a9fea9c3fcf17ad1482736002ab4f71c772407caac" />
+								</util:map>
+							</property>
+						</bean>
+					</property>
+				</bean>
+				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
+			</util:list>
+		</property>
+		<property name="contributors">
+			<util:list>
+				<bean class="xdi2.messaging.target.contributor.impl.digest.GenerateDigestSecretTokenContributor">
+					<property name="globalSalt" value="aea0c2b1-56c6-4443-913c-a3c6ecfe6c99" />
+				</bean>
+				<bean class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
+			</util:list>
+		</property>
+	</bean>
+
+</beans>
