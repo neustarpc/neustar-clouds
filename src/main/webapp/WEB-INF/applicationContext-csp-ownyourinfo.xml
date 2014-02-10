@@ -14,21 +14,19 @@
 					<property name="bootstrapPublicLinkContract" value="true" />
 					<property name="bootstrapGraph">
 						<value>
-							$public$do/$get/$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
-							$public$do/$get/($msg$encrypt$keypair/$is+/{})
-							$public$do/$get/$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
-							$public$do/$get/($msg$sig$keypair/$is+/{})
-							$public$do/$get/&lt;$https&gt;&lt;$connect&gt;&lt;$xdi&gt;&lt;$uri&gt;
+							{$self}$to$anon$from$public$do/$get/{$self}$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is+/{})
+							{$self}$to$anon$from$public$do/$get/{$self}$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is+/{})
 						</value>
 					</property>
 					<property name="bootstrapMessageEnvelope">
 						<value>
-							$anon[$msg]!1$do/$do$keypair/($msg$encrypt$keypair/$is+/$rsa$2048)
-							$anon[$msg]!1$do/$do$keypair/($msg$sig$keypair/$is+/$rsa$2048)
+							$anon[$msg]!1$do/$do$keypair/({$self}$msg$encrypt$keypair/$is+/$rsa$2048)
+							$anon[$msg]!1$do/$do$keypair/({$self}$msg$sig$keypair/$is+/$rsa$2048)
 						</value>
 					</property>
 				</bean>
-				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
@@ -46,14 +44,14 @@
 		<property name="contributors">
 			<util:list>
 				<ref bean="facebookContributor" />
-				<bean id="generateKeyContributor" class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
+				<bean class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
 			</util:list>
 		</property>
 	</bean>
 
 	<!-- OWNYOURINFO: MESSAGING TARGET FACTORY at /ownyourinfo-users/* -->
 
-	<bean name="/ownyourinfo-users/*" class="xdi2.server.factory.impl.RegistryGraphMessagingTargetFactory">
+	<bean name="/ownyourinfo-users/*" class="xdi2.transport.impl.http.factory.impl.RegistryGraphMessagingTargetFactory">
 		<property name="prototypeMessagingTarget" ref="ownyourinfo-prototypeMessagingTarget" />
 		<property name="registryGraph" ref="ownyourinfo-registryGraph" />
 	</bean>
@@ -69,14 +67,15 @@
 		<property name="interceptors">
 			<util:list>
 				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
-					<property name="bootstrapOwner" value="[@]!:uuid:f34559e4-6b2b-d962-f345-59e46b2bd962" />
+					<property name="bootstrapOwner" value="[@]!:uuid:e9449d30-b032-4ad0-89a3-b7498fbc731e" />
 					<property name="bootstrapOwnerSynonyms">
-						<util:list />
+						<util:list>
+							<value>@ownyourinfo</value>
+						</util:list>
 					</property>
 					<property name="bootstrapRootLinkContract" value="true" />
 					<property name="bootstrapPublicLinkContract" value="true" />
 				</bean>
-				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
@@ -85,7 +84,7 @@
 							<property name="globalSalt" value="8b46d9b1-efff-4f7b-8cc2-2d41c8ac8d32" />
 							<property name="localSaltAndDigestSecretTokens">
 								<util:map>
-									<entry key="[@]!:uuid:f34559e4-6b2b-d962-f345-59e46b2bd962" value="xdi2-digest:fb77991d-9fa2-4b44-8314-13fe6ac126b1:d7f3e67a8b5b36892df7414b382d706c99994f95b041a81b5c1bde70cffe67a781e6ac5788e7a4367509f67bcd80551c93cf1573d98d9eb02a620801e1513511" />
+									<entry key="[@]!:uuid:e9449d30-b032-4ad0-89a3-b7498fbc731e" value="xdi2-digest:fb77991d-9fa2-4b44-8314-13fe6ac126b1:d7f3e67a8b5b36892df7414b382d706c99994f95b041a81b5c1bde70cffe67a781e6ac5788e7a4367509f67bcd80551c93cf1573d98d9eb02a620801e1513511" />
 								</util:map>
 							</property>
 						</bean>
@@ -96,9 +95,10 @@
 		</property>
 		<property name="contributors">
 			<util:list>
-				<bean id="generateDigestSecretTokenContributor" class="xdi2.messaging.target.contributor.impl.digest.GenerateDigestSecretTokenContributor">
+				<bean class="xdi2.messaging.target.contributor.impl.digest.GenerateDigestSecretTokenContributor">
 					<property name="globalSalt" value="8b46d9b1-efff-4f7b-8cc2-2d41c8ac8d32" />
 				</bean>
+				<bean class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
 			</util:list>
 		</property>
 	</bean>

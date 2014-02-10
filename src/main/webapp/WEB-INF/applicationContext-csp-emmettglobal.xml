@@ -3,9 +3,9 @@
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
-	<!-- FULLXRI: MESSAGING TARGET TO BE USED AS A PROTOTYPE FOR MESSAGING TARGET FACTORIES -->
+	<!-- EMMETTGLOBAL: MESSAGING TARGET TO BE USED AS A PROTOTYPE FOR MESSAGING TARGET FACTORIES -->
 
-	<bean id="fullxri-prototypeMessagingTarget" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
+	<bean id="emmettglobal-prototypeMessagingTarget" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
 		<property name="graph" ref="prototypeGraph" />
 		<property name="interceptors">
 			<util:list>
@@ -14,28 +14,26 @@
 					<property name="bootstrapPublicLinkContract" value="true" />
 					<property name="bootstrapGraph">
 						<value>
-							$public$do/$get/$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
-							$public$do/$get/($msg$encrypt$keypair/$is+/{})
-							$public$do/$get/$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
-							$public$do/$get/($msg$sig$keypair/$is+/{})
-							$public$do/$get/&lt;$https&gt;&lt;$connect&gt;&lt;$xdi&gt;&lt;$uri&gt;
+							{$self}$to$anon$from$public$do/$get/{$self}$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is+/{})
+							{$self}$to$anon$from$public$do/$get/{$self}$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is+/{})
 						</value>
 					</property>
 					<property name="bootstrapMessageEnvelope">
 						<value>
-							$anon[$msg]!1$do/$do$keypair/($msg$encrypt$keypair/$is+/$rsa$2048)
-							$anon[$msg]!1$do/$do$keypair/($msg$sig$keypair/$is+/$rsa$2048)
+							$anon[$msg]!1$do/$do$keypair/({$self}$msg$encrypt$keypair/$is+/$rsa$2048)
+							$anon[$msg]!1$do/$do$keypair/({$self}$msg$sig$keypair/$is+/$rsa$2048)
 						</value>
 					</property>
 				</bean>
-				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
 					<property name="secretTokenAuthenticator">
 						<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.GraphSecretTokenAuthenticator">
-							<property name="globalSalt" value="0192af5a-1409-472b-8e10-9454fd0c0102" />
-							<property name="secretTokenGraph" ref="fullxri-registryGraph" />
+							<property name="globalSalt" value="aea0c2b1-56c6-4443-913c-a3c6ecfe6c99" />
+							<property name="secretTokenGraph" ref="emmettglobal-registryGraph" />
 						</bean>
 					</property>
 				</bean>
@@ -46,46 +44,47 @@
 		<property name="contributors">
 			<util:list>
 				<ref bean="facebookContributor" />
-				<bean id="generateKeyContributor" class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
+				<bean class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
 			</util:list>
 		</property>
 	</bean>
 
-	<!-- FULLXRI: MESSAGING TARGET FACTORY at /fullxri-users/* -->
+	<!-- EMMETTGLOBAL: MESSAGING TARGET FACTORY at /emmettglobal-users/* -->
 
-	<bean name="/fullxri-users/*" class="xdi2.server.factory.impl.RegistryGraphMessagingTargetFactory">
-		<property name="prototypeMessagingTarget" ref="fullxri-prototypeMessagingTarget" />
-		<property name="registryGraph" ref="fullxri-registryGraph" />
+	<bean name="/emmettglobal-users/*" class="xdi2.transport.impl.http.factory.impl.RegistryGraphMessagingTargetFactory">
+		<property name="prototypeMessagingTarget" ref="emmettglobal-prototypeMessagingTarget" />
+		<property name="registryGraph" ref="emmettglobal-registryGraph" />
 	</bean>
 
-	<!-- FULLXRI: REGISTRY MESSAGING TARGET -->
+	<!-- EMMETTGLOBAL: REGISTRY MESSAGING TARGET -->
 
-	<bean id="fullxri-registryGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph">
-		<constructor-arg><value>FULLXRI-REGISTRY</value></constructor-arg>
+	<bean id="emmettglobal-registryGraph" factory-bean="prototypeGraphFactory" factory-method="openGraph">
+		<constructor-arg><value>EMMETTGLOBAL-REGISTRY</value></constructor-arg>
 	</bean>
 
-	<bean name="/fullxri-registry" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
-		<property name="graph" ref="fullxri-registryGraph" />
+	<bean name="/emmettglobal-registry" class="xdi2.messaging.target.impl.graph.GraphMessagingTarget">
+		<property name="graph" ref="emmettglobal-registryGraph" />
 		<property name="interceptors">
 			<util:list>
 				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
-					<property name="bootstrapOwner" value="[@]!:uuid:026e5985-6045-fced-026e-59856045fced" />
+					<property name="bootstrapOwner" value="[@]!:uuid:690404d0-df12-4a60-a98c-fd975ea79e5b" />
 					<property name="bootstrapOwnerSynonyms">
-						<util:list />
+						<util:list>
+							<value>@emmettglobal</value>
+						</util:list>
 					</property>
 					<property name="bootstrapRootLinkContract" value="true" />
 					<property name="bootstrapPublicLinkContract" value="true" />
 				</bean>
-				<bean class="xdi2.messaging.target.interceptor.impl.VariablesInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.AuthenticationSecretTokenInterceptor">
 					<property name="secretTokenAuthenticator">
 						<bean class="xdi2.messaging.target.interceptor.impl.authentication.secrettoken.StaticSecretTokenAuthenticator">
-							<property name="globalSalt" value="0192af5a-1409-472b-8e10-9454fd0c0102" />
+							<property name="globalSalt" value="aea0c2b1-56c6-4443-913c-a3c6ecfe6c99" />
 							<property name="localSaltAndDigestSecretTokens">
 								<util:map>
-									<entry key="[@]!:uuid:026e5985-6045-fced-026e-59856045fced" value="xdi2-digest:cd191f2c-3bd1-408a-adc8-8386df6cf61d:fa6b3e04192b7fbb632aae8a93f8d98566224210fecf2ea075c02931086c9ee25f79fa68bd7707b91b0092fdfda12dd56c929b51966d8011adad4b772c8cb2ae" />
+									<entry key="[@]!:uuid:690404d0-df12-4a60-a98c-fd975ea79e5b" value="xdi2-digest:961adc0a-eab9-491d-86c4-4fb05779c832:875c1173ba018a284e4f9cc6e2f6a951606afaa124a96ca2f9a318da4bbd99c524287d1c3391365cfc25a2a9fea9c3fcf17ad1482736002ab4f71c772407caac" />
 								</util:map>
 							</property>
 						</bean>
@@ -96,9 +95,10 @@
 		</property>
 		<property name="contributors">
 			<util:list>
-				<bean id="generateDigestSecretTokenContributor" class="xdi2.messaging.target.contributor.impl.digest.GenerateDigestSecretTokenContributor">
-					<property name="globalSalt" value="0192af5a-1409-472b-8e10-9454fd0c0102" />
+				<bean class="xdi2.messaging.target.contributor.impl.digest.GenerateDigestSecretTokenContributor">
+					<property name="globalSalt" value="aea0c2b1-56c6-4443-913c-a3c6ecfe6c99" />
 				</bean>
+				<bean class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
 			</util:list>
 		</property>
 	</bean>
