@@ -15,15 +15,15 @@
                <property name="bootstrapGraph">
                   <value>
                      {$self}$to$anon$from$public$do/$get/{$self}$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
-                     {$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is+/{})
+                     {$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is#/{})
                      {$self}$to$anon$from$public$do/$get/{$self}$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
-                     {$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is+/{})
+                     {$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is#/{})
                   </value>
                </property>
                <property name="bootstrapMessageEnvelope">
                   <value>
-                     $anon[$msg]!1$do/$do$keypair/({$self}$msg$encrypt$keypair/$is+/$rsa$2048)
-                     $anon[$msg]!1$do/$do$keypair/({$self}$msg$sig$keypair/$is+/$rsa$2048)
+                     $anon[$msg]!1$do/$do$keypair/({$self}$msg$encrypt$keypair/$is#/$rsa$2048)
+                     $anon[$msg]!1$do/$do$keypair/({$self}$msg$sig$keypair/$is#/$rsa$2048)
                   </value>
                </property>
             </bean>
@@ -67,10 +67,10 @@
       <property name="interceptors">
          <util:list>
             <bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
-               <property name="bootstrapOwner" value="[@]!:uuid:20e3d77c-5a0e-44d5-b949-85153fbb6577" />
+               <property name="bootstrapOwner" value="[+]!:uuid:20e3d77c-5a0e-44d5-b949-85153fbb6577" />
                <property name="bootstrapOwnerSynonyms">
                   <util:list>
-                     <value>@testcsp</value>
+                     <value>+testcsp</value>
                   </util:list>
                </property>
                <property name="bootstrapRootLinkContract" value="true" />
@@ -78,15 +78,15 @@
                <property name="bootstrapGraph">
                   <value>
                      {$self}$to$anon$from$public$do/$get/{$self}$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
-                     {$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is+/{})
+                     {$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is#/{})
                      {$self}$to$anon$from$public$do/$get/{$self}$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
-                     {$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is+/{})
+                     {$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is#/{})
                   </value>
                </property>
                <property name="bootstrapMessageEnvelope">
                   <value>
-                     $anon[$msg]!1$do/$do$keypair/({$self}$msg$encrypt$keypair/$is+/$rsa$2048)
-                     $anon[$msg]!1$do/$do$keypair/({$self}$msg$sig$keypair/$is+/$rsa$2048)
+                     $anon[$msg]!1$do/$do$keypair/({$self}$msg$encrypt$keypair/$is#/$rsa$2048)
+                     $anon[$msg]!1$do/$do$keypair/({$self}$msg$sig$keypair/$is#/$rsa$2048)
                   </value>
                </property>
             </bean>
@@ -98,7 +98,7 @@
                      <property name="globalSalt" value="aea0c2b1-56c6-4443-913c-a3c6ecfe6c99" />
                      <property name="localSaltAndDigestSecretTokens">
                         <util:map>
-                           <entry key="[@]!:uuid:20e3d77c-5a0e-44d5-b949-85153fbb6577" value="xdi2-digest:095f6c39-b3d3-492e-a37f-9a516ff1cdc3:91f93d004f2b28f2b4651f5a01ee8adf4ddbe08ce96623ce780eced32faea0a16bc9b6f509f43b0845444921934be18cf50a8d17f99c6e516ff01b91c2d4d677" />
+                           <entry key="[+]!:uuid:20e3d77c-5a0e-44d5-b949-85153fbb6577" value="xdi2-digest:095f6c39-b3d3-492e-a37f-9a516ff1cdc3:91f93d004f2b28f2b4651f5a01ee8adf4ddbe08ce96623ce780eced32faea0a16bc9b6f509f43b0845444921934be18cf50a8d17f99c6e516ff01b91c2d4d677" />
                         </util:map>
                      </property>
                   </bean>
