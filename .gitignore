@@ -1,2 +1,3 @@
 /target
 /backup
+/src/main/resources/webapp/WEB-INF/application*.xml
