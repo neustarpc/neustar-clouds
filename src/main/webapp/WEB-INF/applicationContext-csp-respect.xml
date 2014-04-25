@@ -38,12 +38,12 @@
 					</property>
 				</bean>
 				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
-				<ref bean="facebookContributor" />
+				
 			</util:list>
 		</property>
 		<property name="contributors">
 			<util:list>
-				<ref bean="facebookContributor" />
+				
 				<bean class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
 			</util:list>
 		</property>
