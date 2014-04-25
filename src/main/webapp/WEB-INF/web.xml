@@ -29,6 +29,25 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<security-constraint>
+	  <web-resource-collection>
+	    <web-resource-name>
+	      xdi2 graph admin and debug
+	    </web-resource-name>
+	    <url-pattern>/admin/*</url-pattern>
+	  </web-resource-collection>
+	  <auth-constraint>
+	      <role-name>xdi2-admin</role-name>
+	  </auth-constraint>
+	</security-constraint>
+	<!-- Define the Login Configuration for this Application -->
+	<login-config>
+	  <auth-method>BASIC</auth-method>
+	  <realm-name>Admin login a debug feature</realm-name>
+	</login-config>
+	<security-role>
+	<role-name>xdi2-admin</role-name>
+	</security-role>
+	<security-constraint>
   <web-resource-collection>
     <web-resource-name>
       xdi2 graph admin and debug

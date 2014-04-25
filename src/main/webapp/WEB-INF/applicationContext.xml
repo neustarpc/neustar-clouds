@@ -37,5 +37,6 @@
 	<import resource="applicationContext-csp-respect.xml" />
 	<import resource="applicationContext-csp-ownyourinfo.xml" />
 	<import resource="applicationContext-csp-emmettglobal.xml" />
+	<import resource="applicationContext-csp-testcsp.xml" />
 
 </beans>

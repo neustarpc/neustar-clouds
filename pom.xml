@@ -226,21 +226,16 @@
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-transport-http</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>0.2</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-mongodb</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>0.2.x</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>xdi2</groupId>
-			<artifactId>xdi2-connector-facebook</artifactId>
-			<version>0.2-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
+		
 	</dependencies>
 
 </project>

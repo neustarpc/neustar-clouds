@@ -15,9 +15,9 @@
 					<property name="bootstrapGraph">
 						<value>
 							{$self}$to$anon$from$public$do/$get/{$self}$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
-							{$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is+/{})
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is#/{})
 							{$self}$to$anon$from$public$do/$get/{$self}$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
-							{$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is+/{})
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is#/{})
 						</value>
 					</property>
 					<property name="bootstrapMessageEnvelope">
@@ -38,12 +38,12 @@
 					</property>
 				</bean>
 				<bean class="xdi2.messaging.target.interceptor.impl.linkcontract.LinkContractInterceptor" />
-				<ref bean="facebookContributor" />
+				
 			</util:list>
 		</property>
 		<property name="contributors">
 			<util:list>
-				<ref bean="facebookContributor" />
+				
 				<bean class="xdi2.messaging.target.contributor.impl.keygen.GenerateKeyContributor" />
 			</util:list>
 		</property>
@@ -67,14 +67,28 @@
 		<property name="interceptors">
 			<util:list>
 				<bean class="xdi2.messaging.target.interceptor.impl.BootstrapInterceptor">
-					<property name="bootstrapOwner" value="[@]!:uuid:ca51aeb9-e09e-4305-89d7-87a944a1e1fa" />
+					<property name="bootstrapOwner" value="[+]!:uuid:ca51aeb9-e09e-4305-89d7-87a944a1e1fa" />
 					<property name="bootstrapOwnerSynonyms">
 						<util:list>
-							<value>@respect</value>
+							<value>+respect</value>
 						</util:list>
 					</property>
 					<property name="bootstrapRootLinkContract" value="true" />
 					<property name="bootstrapPublicLinkContract" value="true" />
+					<property name="bootstrapGraph">
+						<value>
+							{$self}$to$anon$from$public$do/$get/{$self}$msg$encrypt$keypair&lt;$public&gt;&lt;$key&gt;
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$encrypt$keypair/$is#/{})
+							{$self}$to$anon$from$public$do/$get/{$self}$msg$sig$keypair&lt;$public&gt;&lt;$key&gt;
+							{$self}$to$anon$from$public$do/$get/({$self}$msg$sig$keypair/$is#/{})
+						</value>
+					</property>
+					<property name="bootstrapMessageEnvelope">
+						<value>
+							$anon[$msg]!1$do/$do$keypair/({$self}$msg$encrypt$keypair/$is#/$rsa$2048)
+							$anon[$msg]!1$do/$do$keypair/({$self}$msg$sig$keypair/$is#/$rsa$2048)
+						</value>
+					</property>
 				</bean>
 				<bean class="xdi2.messaging.target.interceptor.impl.RefInterceptor" />
 				<bean class="xdi2.messaging.target.interceptor.impl.ToInterceptor" />
@@ -84,7 +98,7 @@
 							<property name="globalSalt" value="c2293773-3240-4524-8c19-c1f5cbe31b86" />
 							<property name="localSaltAndDigestSecretTokens">
 								<util:map>
-									<entry key="[@]!:uuid:ca51aeb9-e09e-4305-89d7-87a944a1e1fa" value="xdi2-digest:39bc0877-5572-4858-b096-a6189fc2a97f:d2bd5ff789bdb8b1617bb8f860d0bb45dcc33b2bad026afb34b315828d5e8073e886996f232916cf6d909980f1cd4f850c65dc2a109161ed954f3d91e748ee30" />
+									<entry key="[+]!:uuid:ca51aeb9-e09e-4305-89d7-87a944a1e1fa" value="xdi2-digest:39bc0877-5572-4858-b096-a6189fc2a97f:d2bd5ff789bdb8b1617bb8f860d0bb45dcc33b2bad026afb34b315828d5e8073e886996f232916cf6d909980f1cd4f850c65dc2a109161ed954f3d91e748ee30" />
 								</util:map>
 							</property>
 						</bean>
