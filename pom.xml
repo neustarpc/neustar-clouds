@@ -232,7 +232,7 @@
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-mongodb</artifactId>
-			<version>0.2.x</version>
+			<version>0.2</version>
 			<scope>compile</scope>
 		</dependency>
 		
