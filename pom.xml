@@ -5,7 +5,7 @@
 	<groupId>biz.neustar</groupId>
 	<artifactId>neustar-clouds</artifactId>
 	<packaging>war</packaging>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<name>neustar-clouds</name>
 	<description>neustar Clouds</description>
 
@@ -232,7 +232,7 @@
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-mongodb</artifactId>
-			<version>0.3</version>
+			<version>0.4</version>
 			<scope>compile</scope>
 		</dependency>
 		
