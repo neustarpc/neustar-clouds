@@ -226,13 +226,13 @@
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-transport-http</artifactId>
-			<version>0.4</version>
+			<version>0.4.1</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-mongodb</artifactId>
-			<version>0.4</version>
+			<version>0.4.1</version>
 			<scope>compile</scope>
 		</dependency>
 		
