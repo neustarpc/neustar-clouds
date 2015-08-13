@@ -235,7 +235,10 @@
 			<version>0.7</version>
 			<scope>compile</scope>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>3.4.4</version>
+		</dependency>
 	</dependencies>
-
 </project>
